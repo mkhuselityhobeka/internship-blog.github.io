@@ -3,20 +3,19 @@ package org.rest.resources;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.core.model.Blog;
+
 import org.springframework.hateoas.ResourceSupport;
 
 public class BlogListResource extends ResourceSupport{
 
+	private List<BlogResource> blogs = new ArrayList<BlogResource>();
 
-
-    private List<Blog> blogs = new ArrayList<Blog>();
-
-    public List<Blog> getBlogs() {
+    public List<BlogResource> getBlogs() {
         return blogs;
     }
 
-    public void setBlogs(List<Blog> blogs) {
+    public void setBlogs(List<BlogResource> blogs) {
         this.blogs = blogs;
     }
+
 }

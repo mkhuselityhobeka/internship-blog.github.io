@@ -3,7 +3,7 @@ package org.core.dao;
 import java.util.List;
 
 import org.core.model.Account;
-import org.core.model.Blog;
+
 
 public interface AccountDao {
 

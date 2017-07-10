@@ -13,7 +13,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="org.core.DaoImpl"/>
+    <context:component-scan base-package="org.core.services.serviceImpl"/>
+         <context:component-scan base-package="org.core.DaoImpl"/>
+         <context:component-scan base-package="org.core.validator"></context:component-scan>
      
       
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
@@ -31,7 +33,7 @@
         <property name="jpaProperties">
             <map>
                 <entry key="hibernate.show_sql" value="true"/>
-                <entry key="hibernate.hbm2ddl.auto" value="create"/>                
+                               
             </map>
         </property>
         <property name="packagesToScan" value="org.core.model"/>

@@ -7,8 +7,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.core.dao.BlogDao;
+import org.core.model.Account;
 import org.core.model.Blog;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class BlogDaoImpl implements BlogDao{
 
 	
@@ -36,7 +39,7 @@ public class BlogDaoImpl implements BlogDao{
 
 	@Override
 	public Blog findBlogByTitle(String title) {
-		Query query = entityManager.createQuery("SELECT a FROM Blog a WHERE a.title =?1 ");
+		Query query = entityManager.createQuery("SELECT b FROM Blog b WHERE a.title =?1 ");
 		query.setParameter(1, title);
 		List<Blog> blogs = query.getResultList();
 		if(blogs.isEmpty()){
@@ -48,9 +51,9 @@ public class BlogDaoImpl implements BlogDao{
 	}
 
 	@Override
-	public List<Blog> findBlogsByAccount(Long accountId) {
+	public List<Blog> findBlogsByAccount(Long id) {
 		
-		return entityManager.createQuery("FROM Blog order by accountId",Blog.class).getResultList();
+		return entityManager.createQuery("FROM Blog order by id",Blog.class).getResultList();
 	}
 
 	

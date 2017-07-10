@@ -8,10 +8,8 @@ import javax.persistence.Query;
 import org.core.dao.BlogEntryDao;
 import org.core.model.BlogEntry;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public class BlogEntryDaoImpl implements BlogEntryDao {
 
 	@PersistenceContext
@@ -46,9 +44,8 @@ public class BlogEntryDaoImpl implements BlogEntryDao {
 
 	@Override
 	public List<BlogEntry> findByBlogId(Long blogId) {
-		Query query = entityManager.createQuery("SELECT b FROM Blog b WHERE b.blogId =?1");
-		query.setParameter(1, blogId);	
-		return query.getResultList();
+		
+		return entityManager.createQuery("FROM BlogEntry order by id",BlogEntry.class).getResultList();
 	}
 
 }

@@ -33,15 +33,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BlogController {
 	
-	@Autowired
+	
 	private BlogService blogService;
- 	
+	@Autowired
 	public BlogController(BlogService blogService){
 		this.blogService = blogService;
 	}
 
 	// get blog id
-	@RequestMapping(value="/rest/blog-entries/{blogId}", method = RequestMethod.GET)
+	@RequestMapping(value="/rest/accounts/blogs/{blogId}", method = RequestMethod.GET)
 	public ResponseEntity<BlogResource> getBlog(@PathVariable Long blogId){
 	
 		Blog blog = blogService.findBlog(blogId);
@@ -50,12 +50,12 @@ public class BlogController {
 		
 	}
 	//post blog
-	@RequestMapping(value="/rest/blog-Pentries/{blogEntryId}", method = RequestMethod.POST)
-	public ResponseEntity<BlogEntryResource>createBlogEntry(@PathVariable Long  blogEntryId, 
+	@RequestMapping(value="/rest/{blogId}/blog-entries", method = RequestMethod.POST)
+	public ResponseEntity<BlogEntryResource>createBlogEntry(@PathVariable Long  blogId, 
 			@RequestBody BlogEntryResource blogEntryResource){
 		try{
 			HttpHeaders httpHeaders = new HttpHeaders();		
-			BlogEntry createBlogEntry = blogService.createBlogEntry(blogEntryId, blogEntryResource.toBlogEntry());
+			BlogEntry createBlogEntry = blogService.createBlogEntry(blogId, blogEntryResource.toBlogEntry());
 			BlogEntryResource blogResource = new BlogEntryResourceAsm().toResource(createBlogEntry);
 			httpHeaders.setLocation(URI.create(blogResource.getLink("self").getHref()));
 			return new ResponseEntity<BlogEntryResource>(blogResource, httpHeaders, HttpStatus.CREATED);
@@ -78,7 +78,7 @@ public class BlogController {
 	}
 	
 	
-@RequestMapping(value="/rest/blog-Bentries/{blogId}",method = RequestMethod.GET )
+@RequestMapping(value="/rest/blog/{blogId}",method = RequestMethod.GET )
 public ResponseEntity<BlogEntryListResource>findAllBlogEntries(@PathVariable Long blogId ){
 	
 	BlogEntryList blogEntryList = blogService.findAllBlogEntries(blogId);

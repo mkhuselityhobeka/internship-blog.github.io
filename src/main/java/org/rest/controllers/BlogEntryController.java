@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 public class BlogEntryController{
 	
-@Autowired	
+	
 private BlogEntryService blogEntryService ;
 
 public BlogEntryController(){
 	
 }
-@SuppressWarnings("unused")
+@Autowired
+
 private BlogEntryController(BlogEntryService  blogEntryService){
 	 this.blogEntryService =  blogEntryService;
 }
@@ -41,6 +42,7 @@ private BlogEntryController(BlogEntryService  blogEntryService){
 		   return new ResponseEntity<BlogEntryResource>( HttpStatus.NOT_FOUND);
 		
 	}
+
 
 @RequestMapping(value="rest/delete-entries/{blogEntryId}", method=RequestMethod.DELETE)
 public ResponseEntity<BlogEntryResource> deleteBlog(@PathVariable Long blogEntryId){

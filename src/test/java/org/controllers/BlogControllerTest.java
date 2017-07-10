@@ -84,13 +84,13 @@ public class BlogControllerTest {
 			blogEntry.setTitle("JBPM BLOG LINK");
 			blogEntry.setId(1L);
 			when(blogService.createBlogEntry(eq(1L), any(BlogEntry.class))).thenReturn(blogEntry);
-			 mockMvc.perform(post("/rest/blog-Pentries/1")			 		 
+			 mockMvc.perform(post("/rest/1/blog-entries")			 		 
 		     .content("{\"title\":\"Generic Title\"}")
 		     .contentType(MediaType.APPLICATION_JSON))
 			 .andDo(print())
 		     .andExpect(jsonPath("$.title", is(blogEntry.getTitle())))
-		    // .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("rest/blog-Pentries/1"))))
-		    // .andExpect(header().string("Location", endsWith("rest/blog-Pentries/1")))
+		     .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("rest/blog-entries/1"))))
+		     .andExpect(header().string("Location", endsWith("rest/blog-entries/1")))
 		     .andExpect(status().isCreated());
 		}catch(Exception e){
 			e.printStackTrace();
@@ -137,6 +137,7 @@ public class BlogControllerTest {
 		
 		try{
 			BlogEntry blogEntryA = new BlogEntry();
+			
 			blogEntryA.setId(1L);
 			blogEntryA.setTitle("Camel blog added");
 			List<BlogEntry> list = new ArrayList<>();

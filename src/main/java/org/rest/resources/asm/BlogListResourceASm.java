@@ -18,7 +18,7 @@ public class BlogListResourceASm extends ResourceAssemblerSupport<BlogList, Blog
 	public BlogListResource toResource(BlogList blogList) {
 		// TODO Auto-generated method stub
 		 BlogListResource bloListResource = new BlogListResource();
-		 bloListResource.setBlogs(blogList.getBlogs());
+		 bloListResource.setBlogs(new BlogResourceAsm().toResources(blogList.getBlogs()));
 
 		return bloListResource ;
 	}

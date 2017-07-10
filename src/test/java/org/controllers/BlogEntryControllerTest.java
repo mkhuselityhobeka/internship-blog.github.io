@@ -47,7 +47,7 @@ public class BlogEntryControllerTest {
 		
 		try{
 				
-			  BlogEntry entry = new BlogEntry();
+			    BlogEntry entry = new BlogEntry();
 		        entry.setId(1L);
 		        entry.setTitle("Test Title");
 
@@ -64,7 +64,7 @@ public class BlogEntryControllerTest {
 		
 }
 	
-	//Testing a non existing blog entries
+	
 		@Test
 		public void getNonExistingBlogEntry(){
 

@@ -11,12 +11,13 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
   
     <context:component-scan base-package="org.rest.controllers"/>
-
-    <mvc:resources mapping="/app/**" location="/app/"/>
+    
+   <mvc:resources mapping="/resources/**" location="classpath:/resources/" />
+   
     <mvc:annotation-driven/>
 
     <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="prefix" value="/WEB-INF/jsp"/>
         <property name="suffix" value=".jsp"/>
     </bean>
     

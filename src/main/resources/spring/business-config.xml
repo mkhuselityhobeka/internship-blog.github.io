@@ -13,15 +13,18 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:component-scan base-package="org.core.services.serviceImpl"/>
+        <context:component-scan base-package="org.core.services.serviceImpl"/>
          <context:component-scan base-package="org.core.DaoImpl"/>
-         <context:component-scan base-package="org.core.validator"></context:component-scan>
+         <context:component-scan base-package="org.core.dao"/>
+         <context:component-scan base-package="org.core.validator"/>
+         <context:component-scan base-package="org.core.security"/>
+         
      
       
     <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
         <property name="username" value="root"/>
         <property name="password" value=""/>
-      <property name="url" value="jdbc:mysql://localhost:3306/JumpCo-Blog" />
+      <property name="url" value="jdbc:mysql://localhost:3306/JumpCoBlog" />
        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
     </bean>
 
@@ -33,7 +36,7 @@
         <property name="jpaProperties">
             <map>
                 <entry key="hibernate.show_sql" value="true"/>
-                               
+                                             
             </map>
         </property>
         <property name="packagesToScan" value="org.core.model"/>

@@ -17,6 +17,7 @@ public class AccountResourceAsm extends ResourceAssemblerSupport<Account, Accoun
 	public AccountResource toResource(Account account) {
 		   AccountResource accountResource = new AccountResource();
 		   accountResource.setName(account.getName());
+		   accountResource.setEmail(account.getEmail());
 		   accountResource.setPassword(account.getPassword());
 		   accountResource.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
 		   accountResource.add(linkTo(methodOn(AccountController.class).getAllBlogs(account.getId())).withRel("blogs"));

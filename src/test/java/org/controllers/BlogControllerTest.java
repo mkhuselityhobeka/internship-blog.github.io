@@ -1,7 +1,6 @@
 package org.controllers;
 
 
-
 import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.endsWith;
@@ -98,10 +97,6 @@ public class BlogControllerTest {
 		  
 	}
 	
-	
-	
-	
-	
 	//@SuppressWarnings("unchecked")
 	@SuppressWarnings("unchecked")
 	@Test
@@ -157,7 +152,6 @@ public class BlogControllerTest {
 	        .andExpect(jsonPath("$.links[*].href", hasItem(endsWith("/rest/blog-Bentries/1"))))
 	       //.andExpect(jsonPath("$.entries[*].title", hasItem(is("Test Title"))))
 	        .andExpect(status().isOk());
-			
 			
 		}catch(Exception e){
 			e.printStackTrace();

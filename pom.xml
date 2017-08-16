@@ -15,6 +15,7 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             
@@ -40,6 +41,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
         </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+        </dependency>
+        
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -79,8 +86,12 @@
       	<artifactId>hibernate-validator</artifactId>
       	<version>5.2.1.Final</version>
       </dependency>
-      
-      
+      <!-- Jsl library -->
+       <dependency>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+      </dependency>
       
    <!-- Apache commons dbcp for for database pool -->
      <dependency>
@@ -162,10 +173,29 @@
   		 <groupId>javax.el</groupId>
   		 <artifactId>javax.el-api</artifactId>
   		 <version>2.2.4</version>
-	  </dependency>         
-    </dependencies>
-
-  
- 
+	  </dependency>  
+	  
+	  <!-- Sercurity dependencies -->
+	   
+	 <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+              <version> 3.2.3.RELEASE</version> 
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+              <version> 3.2.3.RELEASE</version> 
+        </dependency>     
+       <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.0.1</version>
+        <scope>provided</scope>
+</dependency>
+        
+       
+        
+	</dependencies>  
  <groupId>basic-web-app</groupId>
 </project>

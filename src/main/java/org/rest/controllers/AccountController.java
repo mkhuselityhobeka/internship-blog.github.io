@@ -1,7 +1,6 @@
 package org.rest.controllers;
 
 
-
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,11 +33,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class AccountController {
@@ -51,7 +52,6 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService; 
 	
-	
 	@Autowired
 	AccountValidator validator;
 	
@@ -59,35 +59,26 @@ public class AccountController {
 		this.accountService = accountService;
 	}
 	
-	
 	@RequestMapping(value="/rest/accounts/{accountId}", method= RequestMethod.GET)
-	public ResponseEntity<AccountResource> getAccount(@PathVariable Long accountId){
+	public ResponseEntity<AccountResource> getAccount(@PathVariable Long accountId){	
 		
 		Account account = accountService.findAccount(accountId);	
-		if(account != null){
-			
+		
+		if(account != null){	
 			AccountResource accountResource = new AccountResourceAsm().toResource(account);
 			return new  ResponseEntity<AccountResource>(accountResource, HttpStatus.OK);
 
 		}else{
 			return new  ResponseEntity<AccountResource>( HttpStatus.NOT_FOUND);
-
 		}
 		
 	}
 	
 	@RequestMapping(value="/rest/accounts", method= RequestMethod.POST)
-    public ResponseEntity<AccountResource> createAccounts(@RequestBody AccountResource resource){
+    public ResponseEntity<AccountResource> createAccounts(@Validated@RequestBody AccountResource resource){
 	try{
-//		AccountValidator validator = new AccountValidator();
-//		validator.validate(username, result);
-//		if(result.hasErrors()){
-//			return new ResponseEntity<AccountResource>(HttpStatus.BAD_REQUEST);
-//		}else{
-		
-			
 			HttpHeaders httpHeaders = new HttpHeaders();
-			Account account = accountService.createAccount(resource.toAccount());
+			 Account account = accountService.createAccount(resource.toAccount());
 			AccountResource accountResource = new AccountResourceAsm().toResource(account);
 			httpHeaders.setLocation(URI.create(accountResource.getLink("self").getHref()));
 			return new ResponseEntity<AccountResource>(accountResource,httpHeaders, HttpStatus.CREATED);
@@ -95,8 +86,8 @@ public class AccountController {
 	
 	}catch(AccountExistsException exception){
 	 throw new ConflictException();
-	}	}
-		
+	        }	
+	}	
 	
 	
 	@RequestMapping(value="/rest/accounts/{accountId}/blogs", method= RequestMethod.POST)
@@ -116,6 +107,8 @@ public class AccountController {
 		
 	}
 	
+	
+	
 	@RequestMapping(value="/rest/accounts", method= RequestMethod.GET)
 	public ResponseEntity<AccountListResource>findAllAccounts(@RequestParam(value="name", required = false) String name){
 		
@@ -133,6 +126,7 @@ public class AccountController {
 	        AccountListResource res = new AccountListResurceAsm().toResource(list);
 	        return new ResponseEntity<AccountListResource>(res, HttpStatus.OK);
 	    }
+	
 	
 	
 	@RequestMapping(value="/rest/accounts/{accountId}/blogs", method= RequestMethod.GET)
